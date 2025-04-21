@@ -1,0 +1,6 @@
+5
+1;Carlos Rodrigues;0.90
+2;Emanuel Ishikawa;5.32
+3;Geraldo Iglesias;8.20
+4;Olivia Torres;4.44
+5;Luciana Porto;1.51
