@@ -27,18 +27,18 @@ public class Main {
             ordenada.adicionar(aluno);
         }
         long fim = System.nanoTime();
-        System.out.println("Tempo de leitura e inserção: " + (fim - inicio) + " ns");
+        System.out.println("Tempo de leitura e insercao: " + (fim - inicio) + " ns");
 
         while (true) {
-            System.out.println("\n1. Pesquisar na lista NÃO ordenada");
+            System.out.println("\n1. Pesquisar na lista NAO ordenada");
             System.out.println("2. Pesquisar na lista ORDENADA");
             System.out.println("3. Sair");
-            System.out.print("Opção: ");
+            System.out.print("Opcao: ");
             int opcao = in.nextInt();
 
             if (opcao == 3) break;
 
-            System.out.print("Digite a matrícula do aluno: ");
+            System.out.print("Digite a matricula do aluno: ");
             int mat = in.nextInt();
             Aluno chave = new Aluno(mat, "", 0);
 
@@ -46,13 +46,13 @@ public class Main {
                 inicio = System.nanoTime();
                 Aluno encontrado = naoOrdenada.pesquisar(chave);
                 fim = System.nanoTime();
-                System.out.println(encontrado != null ? encontrado : "Aluno não encontrado.");
+                System.out.println(encontrado != null ? encontrado : "Aluno nao encontrado.");
                 System.out.println("Tempo de pesquisa: " + (fim - inicio) + " ns");
             } else if (opcao == 2) {
                 inicio = System.nanoTime();
                 Aluno encontrado = ordenada.pesquisar(chave);
                 fim = System.nanoTime();
-                System.out.println(encontrado != null ? encontrado : "Aluno não encontrado.");
+                System.out.println(encontrado != null ? encontrado : "Aluno nao encontrado.");
                 System.out.println("Tempo de pesquisa: " + (fim - inicio) + " ns");
             }
         }
