@@ -1,36 +1,68 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package lib;
+
+/**
+ *
+ * @author victoriocarvalho
+ */
 public class NoArvore<T> {
-    T valor;
-    NoArvore<T> esquerda;
-    NoArvore<T> direita;
+    
+    private T valor;
+    private NoArvore<T> filhoDireita;
+    private NoArvore<T> filhoEsquerda;
 
-    public NoArvore(T valor) {
+    
+    public NoArvore(T valor){
         this.valor = valor;
-        this.esquerda = null;
-        this.direita = null;
+        this.filhoDireita = null;
+        this.filhoEsquerda = null;
     }
-
+    
+    /**
+     * @return the valor
+     */
     public T getValor() {
         return valor;
     }
 
+    /**
+     * @param valor the valor to set
+     */
     public void setValor(T valor) {
         this.valor = valor;
     }
 
-    public NoArvore<T> getEsquerda() {
-        return esquerda;
+    /**
+     * @return the filhoDireita
+     */
+    public NoArvore<T> getFilhoDireita() {
+        return filhoDireita;
     }
 
-    public void setEsquerda(NoArvore<T> esquerda) {
-        this.esquerda = esquerda;
+    /**
+     * @param filhoDireita the filhoDireita to set
+     */
+    public void setFilhoDireita(NoArvore<T> filhoDireita) {
+        this.filhoDireita = filhoDireita;
     }
 
-    public NoArvore<T> getDireita() {
-        return direita;
+    /**
+     * @return the filhoEsquerda
+     */
+    public NoArvore<T> getFilhoEsquerda() {
+        return filhoEsquerda;
     }
 
-    public void setDireita(NoArvore<T> direita) {
-        this.direita = direita;
+    /**
+     * @param filhoEsquerda the filhoEsquerda to set
+     */
+    public void setFilhoEsquerda(NoArvore<T> filhoEsquerda) {
+        this.filhoEsquerda = filhoEsquerda;
     }
+    
+    
 }
