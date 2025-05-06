@@ -108,16 +108,82 @@ public class ArvoreBinaria<T extends Comparable<T>> implements IArvoreBinaria<T>
 
     @Override
     public String caminharEmNivel() {
-        throw new UnsupportedOperationException("Ainda não implementado");
+        if (raiz == null) return "";
+
+        StringBuilder sb = new StringBuilder();
+        Queue<NoArvore<T>> fila = new LinkedList<>();
+        fila.add(raiz);
+
+        while (!fila.isEmpty()) {
+            NoArvore<T> atual = fila.poll();
+            sb.append(atual.getValor()).append(" ");
+
+            if (atual.getFilhoEsquerda() != null) fila.add(atual.getFilhoEsquerda());
+            if (atual.getFilhoDireita() != null) fila.add(atual.getFilhoDireita());
+        }
+
+        return sb.toString().trim();
     }
 
     @Override
     public String caminharEmOrdem() {
-        throw new UnsupportedOperationException("Ainda não implementado");
+        StringBuilder sb = new StringBuilder();
+        caminharEmOrdem(raiz, sb);
+        return sb.toString().trim();
+    }
+
+    public void caminharEmOrdem(NoArvore<T> no, StringBuilder sb) {
+        if (no != null) {
+            caminharEmOrdem(no.getFilhoEsquerda(), sb);
+            sb.append(no.getValor()).append(" ");
+            caminharEmOrdem(no.getFilhoDireita(), sb);
+        }
     }
 
     @Override
     public T remover(T valor) {
-        throw new UnsupportedOperationException("Ainda não implementado");
+        NoArvore<T> atual = raiz;
+        NoArvore<T> pai = null;
+
+        while (atual != null && !atual.getValor().equals(valor)) {
+            pai = atual;
+            if (valor.compareTo(atual.getValor()) < 0) {
+                atual = atual.getFilhoEsquerda();
+            } else {
+                atual = atual.getFilhoDireita();
+            }
+        }
+
+        if (atual == null) return null; // valor não encontrado
+
+        T valorRemovido = atual.getValor();
+
+        if (atual.getFilhoEsquerda() == null && atual.getFilhoDireita() == null) {
+            if (atual == raiz) raiz = null;
+            else if (pai.getFilhoEsquerda() == atual) pai.setFilhoEsquerda(null);
+            else pai.setFilhoDireita(null);
+        } else if (atual.getFilhoEsquerda() == null || atual.getFilhoDireita() == null) {
+            NoArvore<T> filhoUnico = (atual.getFilhoEsquerda() != null) ? atual.getFilhoEsquerda() : atual.getFilhoDireita();
+            if (atual == raiz) raiz = filhoUnico;
+            else if (pai.getFilhoEsquerda() == atual) pai.setFilhoEsquerda(filhoUnico);
+            else pai.setFilhoDireita(filhoUnico);
+        } else {
+            NoArvore<T> substituto = atual.getFilhoDireita();
+            NoArvore<T> paiSubstituto = atual;
+            while (substituto.getFilhoEsquerda() != null) {
+                paiSubstituto = substituto;
+                substituto = substituto.getFilhoEsquerda();
+            }
+
+            atual.setValor(substituto.getValor());
+
+            if (paiSubstituto.getFilhoEsquerda() == substituto) {
+                paiSubstituto.setFilhoEsquerda(substituto.getFilhoDireita());
+            } else {
+                paiSubstituto.setFilhoDireita(substituto.getFilhoDireita());
+            }
+        }
+
+        return valorRemovido;
     }
 }
