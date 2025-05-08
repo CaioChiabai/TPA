@@ -7,9 +7,11 @@ import java.util.Queue;
 public class ArvoreBinaria<T extends Comparable<T>> implements IArvoreBinaria<T> {
 
     private NoArvore<T> raiz;
+    private Comparator<T> comparador;
 
-    public ArvoreBinaria() {
+    public ArvoreBinaria(Comparator<T> comparador) {
         this.raiz = null;
+        this.comparador = comparador;
     }
 
     @Override
