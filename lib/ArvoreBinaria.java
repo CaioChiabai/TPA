@@ -137,7 +137,7 @@ public class ArvoreBinaria<T extends Comparable<T>> implements IArvoreBinaria<T>
     public void caminharEmOrdem(NoArvore<T> no, StringBuilder sb) {
         if (no != null) {
             caminharEmOrdem(no.getFilhoEsquerda(), sb);
-            sb.append(no.getValor()).append(" ");
+            sb.append(no.getValor()).append("\n\n");
             caminharEmOrdem(no.getFilhoDireita(), sb);
         }
     }
