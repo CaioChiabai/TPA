@@ -24,18 +24,6 @@ public class AppLivro {
 
         IArvoreBinaria<Livro> arvore = new ArvoreBinaria<>(comparadorPrincipal);
 
-        Livro livro1 = new Livro(1, "A Guerra dos Tronos", "George R. R. Martin", "Excelente começo para uma série épica.", "10/3/2020", 9);
-        Livro livro2 = new Livro(2, "O Hobbit", "J. R. R. Tolkien", "Uma jornada leve e mágica.", "22/5/2021", 8);
-        Livro livro3 = new Livro(3, "Dom Quixote", "Miguel de Cervantes", "Um clássico com muito humor e crítica.", "5/11/2022", 7);
-        Livro livro4 = new Livro(4, "1984", "George Orwell", "Assustadoramente atual.", "14/8/2020", 10);
-        Livro livro5 = new Livro(5, "A Revolução dos Bichos", "George Orwell", "Fábula crítica e direta.", "30/1/2024", 9);
-
-        arvore.adicionar(livro1);
-        arvore.adicionar(livro2);
-        arvore.adicionar(livro3);
-        arvore.adicionar(livro4);
-        arvore.adicionar(livro5);
-
         while (true) {
             System.out.println("\nEscolha a opcao:");
             System.out.println("1. Adicionar livro");
