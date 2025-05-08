@@ -14,6 +14,10 @@ public class ArvoreBinaria<T extends Comparable<T>> implements IArvoreBinaria<T>
         this.comparador = comparador;
     }
 
+    private int comparar(T a, T b) {
+        return (comparador != null) ? comparador.compare(a, b) : a.compareTo(b);
+    }
+
     @Override
     public void adicionar(T novoValor) {
         if (raiz == null) {
@@ -23,23 +27,22 @@ public class ArvoreBinaria<T extends Comparable<T>> implements IArvoreBinaria<T>
 
         NoArvore<T> atual = raiz;
         while (true) {
-            int comparacao = novoValor.compareTo(atual.getValor());
+            int comparacao = comparar(novoValor, atual.getValor());
 
             if (comparacao < 0) {
                 if (atual.getFilhoEsquerda() == null) {
                     atual.setFilhoEsquerda(new NoArvore<>(novoValor));
-                    break;
+                    return;
                 }
                 atual = atual.getFilhoEsquerda();
             } else if (comparacao > 0) {
                 if (atual.getFilhoDireita() == null) {
                     atual.setFilhoDireita(new NoArvore<>(novoValor));
-                    break;
+                    return;
                 }
                 atual = atual.getFilhoDireita();
             } else {
-                // valor já existe, não insere duplicado
-                break;
+                return; // valor já existe, não adiciona duplicado
             }
         }
     }
@@ -49,7 +52,8 @@ public class ArvoreBinaria<T extends Comparable<T>> implements IArvoreBinaria<T>
         NoArvore<T> atual = raiz;
 
         while (atual != null) {
-            int comparacao = valor.compareTo(atual.getValor());
+            int comparacao = comparar(valor, atual.getValor());
+
             if (comparacao == 0) {
                 return atual.getValor();
             } else if (comparacao < 0) {
@@ -63,7 +67,7 @@ public class ArvoreBinaria<T extends Comparable<T>> implements IArvoreBinaria<T>
     }
 
     @Override
-    public T pesquisar(T valor, Comparator comparador) {
+    public T pesquisar(T valor, Comparator comparadorAlternativo) {
         if (raiz == null) return null;
 
         Queue<NoArvore<T>> fila = new LinkedList<>();
@@ -71,75 +75,15 @@ public class ArvoreBinaria<T extends Comparable<T>> implements IArvoreBinaria<T>
 
         while (!fila.isEmpty()) {
             NoArvore<T> atual = fila.poll();
-            if (comparador.compare(valor, atual.getValor()) == 0) {
+            if (comparadorAlternativo.compare(valor, atual.getValor()) == 0) {
                 return atual.getValor();
             }
-
-            if (atual.getFilhoEsquerda() != null) {
-                fila.add(atual.getFilhoEsquerda());
-            }
-            if (atual.getFilhoDireita() != null) {
-                fila.add(atual.getFilhoDireita());
-            }
-        }
-
-        return null;
-    }
-
-    @Override
-    public int altura() {
-        return calcularAltura(raiz);
-    }
-
-    private int calcularAltura(NoArvore<T> no) {
-        if (no == null) return -1;
-        int altEsq = calcularAltura(no.getFilhoEsquerda());
-        int altDir = calcularAltura(no.getFilhoDireita());
-        return 1 + Math.max(altEsq, altDir);
-    }
-
-    @Override
-    public int quantidadeNos() {
-        return contarNos(raiz);
-    }
-
-    private int contarNos(NoArvore<T> no) {
-        if (no == null) return 0;
-        return 1 + contarNos(no.getFilhoEsquerda()) + contarNos(no.getFilhoDireita());
-    }
-
-    @Override
-    public String caminharEmNivel() {
-        if (raiz == null) return "";
-
-        StringBuilder sb = new StringBuilder();
-        Queue<NoArvore<T>> fila = new LinkedList<>();
-        fila.add(raiz);
-
-        while (!fila.isEmpty()) {
-            NoArvore<T> atual = fila.poll();
-            sb.append(atual.getValor()).append(" ");
 
             if (atual.getFilhoEsquerda() != null) fila.add(atual.getFilhoEsquerda());
             if (atual.getFilhoDireita() != null) fila.add(atual.getFilhoDireita());
         }
 
-        return sb.toString().trim();
-    }
-
-    @Override
-    public String caminharEmOrdem() {
-        StringBuilder sb = new StringBuilder();
-        caminharEmOrdem(raiz, sb);
-        return sb.toString().trim();
-    }
-
-    public void caminharEmOrdem(NoArvore<T> no, StringBuilder sb) {
-        if (no != null) {
-            caminharEmOrdem(no.getFilhoEsquerda(), sb);
-            sb.append(no.getValor()).append("\n\n");
-            caminharEmOrdem(no.getFilhoDireita(), sb);
-        }
+        return null;
     }
 
     @Override
@@ -147,16 +91,16 @@ public class ArvoreBinaria<T extends Comparable<T>> implements IArvoreBinaria<T>
         NoArvore<T> atual = raiz;
         NoArvore<T> pai = null;
 
-        while (atual != null && !atual.getValor().equals(valor)) {
+        while (atual != null && comparar(valor, atual.getValor()) != 0) {
             pai = atual;
-            if (valor.compareTo(atual.getValor()) < 0) {
+            if (comparar(valor, atual.getValor()) < 0) {
                 atual = atual.getFilhoEsquerda();
             } else {
                 atual = atual.getFilhoDireita();
             }
         }
 
-        if (atual == null) return null; // valor não encontrado
+        if (atual == null) return null;
 
         T valorRemovido = atual.getValor();
 
@@ -187,5 +131,63 @@ public class ArvoreBinaria<T extends Comparable<T>> implements IArvoreBinaria<T>
         }
 
         return valorRemovido;
+    }
+
+    @Override
+    public int altura() {
+        return calcularAltura(raiz);
+    }
+
+    private int calcularAltura(NoArvore<T> no) {
+        if (no == null) return -1;
+        int altEsq = calcularAltura(no.getFilhoEsquerda());
+        int altDir = calcularAltura(no.getFilhoDireita());
+        return 1 + Math.max(altEsq, altDir);
+    }
+
+    @Override
+    public int quantidadeNos() {
+        return contarNos(raiz);
+    }
+
+    private int contarNos(NoArvore<T> no) {
+        if (no == null) return 0;
+        return 1 + contarNos(no.getFilhoEsquerda()) + contarNos(no.getFilhoDireita());
+    }
+
+    @Override
+    public String caminharEmNivel() {
+        if (raiz == null) return "[]";
+
+        StringBuilder sb = new StringBuilder("[");
+        Queue<NoArvore<T>> fila = new LinkedList<>();
+        fila.add(raiz);
+
+        while (!fila.isEmpty()) {
+            NoArvore<T> atual = fila.poll();
+            sb.append(atual.getValor()).append(" \n");
+
+            if (atual.getFilhoEsquerda() != null) fila.add(atual.getFilhoEsquerda());
+            if (atual.getFilhoDireita() != null) fila.add(atual.getFilhoDireita());
+        }
+
+        sb.append("]");
+        return sb.toString();
+    }
+
+    @Override
+    public String caminharEmOrdem() {
+        StringBuilder sb = new StringBuilder("[\n");
+        caminharEmOrdem(raiz, sb);
+        sb.append("]");
+        return sb.toString();
+    }
+
+    private void caminharEmOrdem(NoArvore<T> no, StringBuilder sb) {
+        if (no != null) {
+            caminharEmOrdem(no.getFilhoEsquerda(), sb);
+            sb.append(no.getValor()).append("\n\n");
+            caminharEmOrdem(no.getFilhoDireita(), sb);
+        }
     }
 }
