@@ -133,17 +133,31 @@ public class ArvoreBinaria<T extends Comparable<T>> implements IArvoreBinaria<T>
         return valorRemovido;
     }
 
-    @Override
-    public int altura() {
-        return calcularAltura(raiz);
+   @Override
+public int altura() {
+    if (raiz == null) return -1;
+    
+    Queue<NoArvore<T>> fila = new LinkedList<>();
+    fila.add(raiz);
+    int altura = -1;
+    
+    while (!fila.isEmpty()) {
+        int nodesNesteNivel = fila.size();
+        altura++;
+        
+        for (int i = 0; i < nodesNesteNivel; i++) {
+            NoArvore<T> atual = fila.poll();
+            
+            if (atual.getFilhoEsquerda() != null) {
+                fila.add(atual.getFilhoEsquerda());
+            }
+            if (atual.getFilhoDireita() != null) {
+                fila.add(atual.getFilhoDireita());
+            }
+        }
     }
-
-    private int calcularAltura(NoArvore<T> no) {
-        if (no == null) return -1;
-        int altEsq = calcularAltura(no.getFilhoEsquerda());
-        int altDir = calcularAltura(no.getFilhoDireita());
-        return 1 + Math.max(altEsq, altDir);
-    }
+    return altura;
+}
 
     @Override
     public int quantidadeNos() {
