@@ -6,7 +6,7 @@ import java.util.Queue;
 
 public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
-    private NoArvore<T> raiz;
+    protected NoArvore<T> raiz;
     private Comparator<T> comparador;
 
     public ArvoreBinaria(Comparator<T> comparador) {
@@ -14,7 +14,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         this.comparador = comparador;
     }
 
-    private int comparar(T a, T b) {
+    public int comparar(T a, T b) {
         return  comparador.compare(a, b);
     }
 
@@ -134,30 +134,30 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     }
 
    @Override
-public int altura() {
-    if (raiz == null) return -1;
-    
-    Queue<NoArvore<T>> fila = new LinkedList<>();
-    fila.add(raiz);
-    int altura = -1;
-    
-    while (!fila.isEmpty()) {
-        int nodesNesteNivel = fila.size();
-        altura++;
+    public int altura() {
+        if (raiz == null) return -1;
         
-        for (int i = 0; i < nodesNesteNivel; i++) {
-            NoArvore<T> atual = fila.poll();
+        Queue<NoArvore<T>> fila = new LinkedList<>();
+        fila.add(raiz);
+        int altura = -1;
+        
+        while (!fila.isEmpty()) {
+            int nodesNesteNivel = fila.size();
+            altura++;
             
-            if (atual.getFilhoEsquerda() != null) {
-                fila.add(atual.getFilhoEsquerda());
-            }
-            if (atual.getFilhoDireita() != null) {
-                fila.add(atual.getFilhoDireita());
+            for (int i = 0; i < nodesNesteNivel; i++) {
+                NoArvore<T> atual = fila.poll();
+                
+                if (atual.getFilhoEsquerda() != null) {
+                    fila.add(atual.getFilhoEsquerda());
+                }
+                if (atual.getFilhoDireita() != null) {
+                    fila.add(atual.getFilhoDireita());
+                }
             }
         }
+        return altura;
     }
-    return altura;
-}
 
     @Override
     public int quantidadeNos() {
