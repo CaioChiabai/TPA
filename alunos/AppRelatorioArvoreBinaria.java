@@ -27,19 +27,19 @@ public class AppRelatorioArvoreBinaria {
         
 //------Início do trecho a ser considerado nas questões 1, 2 e 3 do relatório-------------------------------
         //Instancio uma árvore binária. Lembre de ajustar o import para sua classe de árvore binária
-        arv = new ArvoreBinaria<>(compPorMatricula);
+        arv = new ArvoreBinaria(compPorMatricula);
         //Chamo o gerador para inserir 100 elementos nessa árvore de forma que fique degenerada
         gerador.geraArvoreDegenerada(100, arv);
         System.out.println("Árvore Degenerada Criada");
         //Imprimo a quantidade de nós e a altura da árvore resultante
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
         System.out.println("\n");
-        arv = new ArvoreBinaria<>(compPorMatricula);
+        arv = new ArvoreBinaria(compPorMatricula);
         gerador.geraArvoreDegenerada(200, arv);
         System.out.println("Árvore Degenerada Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
         System.out.println("\n");
-        arv = new ArvoreBinaria<>(compPorMatricula);
+        arv = new ArvoreBinaria(compPorMatricula);
         gerador.geraArvoreDegenerada(1000, arv);
         System.out.println("Árvore Degenerada Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
@@ -47,18 +47,18 @@ public class AppRelatorioArvoreBinaria {
 //------Fim do trecho citado nas questões 1, 2 e 3 do relatório-------------------------------
 
 //------Início do trecho citado nas questões 5, 6 e 7 do relatório-------------------------------
-        arv = new ArvoreBinaria<>(compPorMatricula);
+        arv = new ArvoreBinaria(compPorMatricula);
         //Chamo o gerador para inserir 100 elementos nessa árvore de forma que ela fique perfeitamente balanceada
         gerador.geraArvorePerfeitamenteBalanceada(1,100,arv);
         System.out.println("Árvore Perfeitamente Balanceada Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
         System.out.println("\n");
-        arv = new ArvoreBinaria<>(compPorMatricula);
+        arv = new ArvoreBinaria(compPorMatricula);
         gerador.geraArvorePerfeitamenteBalanceada(1,200,arv);
         System.out.println("Árvore Perfeitamente Balanceada Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
         System.out.println("\n");
-        arv = new ArvoreBinaria<>(compPorMatricula);
+        arv = new ArvoreBinaria(compPorMatricula);
         gerador.geraArvorePerfeitamenteBalanceada(1,1000,arv);
         System.out.println("Árvore Perfeitamente Balanceada Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
@@ -66,7 +66,7 @@ public class AppRelatorioArvoreBinaria {
 //------Fim do trecho citado nas questões 5, 6 e 7 do relatório-------------------------------
 
 //------Início do trecho citado na questão 9 do relatório-------------------------------
-        arv = new ArvoreBinaria<>(compPorMatricula);
+        arv = new ArvoreBinaria(compPorMatricula);
         gerador.geraArvorePerfeitamenteBalanceada(1,100,arv);
         System.out.println("Árvore Perfeitamente Balanceada Criada");
         //Vou fazer uma busca pela chave de busca da árvore, ou seja, matrícula
@@ -81,16 +81,17 @@ public class AppRelatorioArvoreBinaria {
             System.out.println("Aluno não encontrado");
         else
             System.out.println("Aluno encontrado: "+busca);
+        System.out.println("\n");
 //------Fim do trecho citado na questão 9 do relatório-------------------------------
 
 
 //------Início do trecho citado na questão 10 do relatório-------------------------------
-        arv = new ArvoreBinaria<>(compPorMatricula);
+        arv = new ArvoreBinaria(compPorMatricula);
         gerador.geraArvorePerfeitamenteBalanceada(1,50000,arv);
         System.out.println("Árvore Perfeitamente Balanceada Criada");
         System.out.println("Altura: " + arv.altura());
         System.out.println("\n");
-        arv = new ArvoreBinaria<>(compPorMatricula);
+        arv = new ArvoreBinaria(compPorMatricula);
         gerador.geraArvoreDegenerada(50000, arv);
         System.out.println("Árvore Degenerada Criada");
         System.out.println(" Altura: " + arv.altura());

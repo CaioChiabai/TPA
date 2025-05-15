@@ -8,7 +8,7 @@ package alunos;
  * programas de teste para redigir os relatórios.
  */
 
- public class Aluno implements Comparable<Aluno> {
+ public class Aluno  {
      private int matricula;
      private String nome;
  
@@ -17,12 +17,6 @@ package alunos;
          this.nome = nome;
      }
  
-     @Override
-     public int compareTo(Aluno outro) {
-         return Integer.compare(this.matricula, outro.matricula);
-     }
-
-
     public int getMatricula() {
         return matricula;
     }

@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class ArvoreBinaria<T extends Comparable<T>> implements IArvoreBinaria<T> {
+public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     private NoArvore<T> raiz;
     private Comparator<T> comparador;
@@ -15,7 +15,7 @@ public class ArvoreBinaria<T extends Comparable<T>> implements IArvoreBinaria<T>
     }
 
     private int comparar(T a, T b) {
-        return (comparador != null) ? comparador.compare(a, b) : a.compareTo(b);
+        return  comparador.compare(a, b);
     }
 
     @Override
