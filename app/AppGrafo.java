@@ -30,10 +30,10 @@ public class AppGrafo {
 
                 String[] partes = linha.split("\\s+");
                 if (partes.length == 1) {
-                    grafo.adicionarVertice(partes[0]);
+                    grafo.adicionarVertice(partes[0].toUpperCase());
                 } else if (partes.length == 3) {
-                    String origem = partes[0];
-                    String destino = partes[1];
+                    String origem = partes[0].toUpperCase();
+                    String destino = partes[1].toUpperCase();
                     float peso = Float.parseFloat(partes[2]);
                     grafo.adicionarAresta(origem, destino, peso);
                 } else {
@@ -59,12 +59,11 @@ public class AppGrafo {
             System.out.println("1 - Imprimir grafo");
             System.out.println("2 - Caminhamento em largura (BFS)");
             System.out.println("3 - " + (direcionado ? "Dijkstra" : "Kruskal"));
-            
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
 
             int opcao = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine(); // consumir a quebra de linha
 
             switch (opcao) {
                 case 1:
@@ -73,14 +72,14 @@ public class AppGrafo {
 
                 case 2:
                     System.out.print("Vértice inicial para BFS: ");
-                    String inicio = scanner.nextLine();
+                    String inicio = scanner.nextLine().trim().toUpperCase();
                     grafo.bfs(inicio);
                     break;
 
                 case 3:
                     if (direcionado) {
                         System.out.print("Vértice inicial para Dijkstra: ");
-                        String origem = scanner.nextLine();
+                        String origem = scanner.nextLine().trim().toUpperCase();
                         Dijkstra.executar(grafo, origem);
                     } else {
                         Kruskal.executar(grafo);
