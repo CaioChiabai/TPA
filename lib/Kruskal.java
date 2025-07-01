@@ -5,7 +5,7 @@ import java.util.*;
 public class Kruskal {
     public static <T> void executar(Grafo<T> grafo) {
         if (grafo.isDirecionado()) {
-            System.out.println("Erro: Kruskal só funciona em grafos não-direcionados.");
+            System.out.println("Erro: Kruskal so funciona em grafos nao-direcionados.");
             return;
         }
 
@@ -42,7 +42,7 @@ public class Kruskal {
             }
         }
 
-        System.out.println("Arvore Geradora Mínima (Kruskal):");
+        System.out.println("Arvore Geradora Minima (Kruskal):");
         for (Aresta<T> a : resultado) {
             System.out.println(a);
         }

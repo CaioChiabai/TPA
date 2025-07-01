@@ -37,7 +37,7 @@ public class Grafo<T> {
 
     public void bfs(T inicio) {
         if (!vertices.containsKey(inicio)) {
-            System.out.println("Vértice inicial não encontrado.");
+            System.out.println("Vertice inicial nao encontrado.");
             return;
         }
 

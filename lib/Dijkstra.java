@@ -34,7 +34,7 @@ public class Dijkstra {
             }
         }
 
-        System.out.println("Distâncias e caminhos mínimos a partir de " + origem + ":");
+        System.out.println("Distancias e caminhos minimos a partir de " + origem + ":");
         for (T destino : distancias.keySet()) {
             float dist = distancias.get(destino);
             System.out.print(destino + ": " + dist);
