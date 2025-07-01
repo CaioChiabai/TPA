@@ -42,7 +42,7 @@ public class Kruskal {
             }
         }
 
-        System.out.println("Árvore Geradora Mínima (Kruskal):");
+        System.out.println("Arvore Geradora Mínima (Kruskal):");
         for (Aresta<T> a : resultado) {
             System.out.println(a);
         }
